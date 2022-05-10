@@ -73,15 +73,15 @@ def logout():
 def dashboard():
     debit_result = db.session.query(func.sum(Transaction.amount)).filter_by(user_id = current_user.get_id()).filter_by(type = 'DEBIT').one()[0]
     credit_result = db.session.query(func.sum(Transaction.amount)).filter_by(user_id = current_user.get_id()).filter_by(type = 'CREDIT').one()[0]
-    if str(debit_result).isnumeric():
-        debit_result = '$' + str(debit_result)
+    if str(debit_result) != 'None':
+        debit_result = str(debit_result) + '$'
     else:
-        debit_result = '$0'
+        debit_result = '0$'
 
-    if str(credit_result).isnumeric():
-        credit_result = '$' + str(credit_result)
+    if str(credit_result) != 'None':
+        credit_result = str(credit_result) + '$'
     else:
-        credit_result = '$0'
+        credit_result = '0$'
     return render_template('dashboard.html', credit_result=credit_result, debit_result=debit_result)
 
 
