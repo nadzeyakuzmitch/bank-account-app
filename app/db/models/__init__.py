@@ -1,8 +1,23 @@
 from datetime import datetime
 
-from werkzeug.security import check_password_hash, generate_password_hash
 from app.db import db
 from flask_login import UserMixin
+from sqlalchemy import ForeignKey, Integer
+from sqlalchemy.orm import relationship
+from werkzeug.security import check_password_hash, generate_password_hash
+
+
+class Transaction(db.Model):
+    __tablename__ = 'transaction'
+    id = db.Column(db.Integer, primary_key=True)
+    type = db.Column(db.String(300), nullable=True, unique=False)
+    amount = db.Column(db.Integer, nullable=True, unique=False)
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+    user = relationship("User", back_populates="transaction", uselist=False)
+
+    def __init__(self, type, amount):
+        self.type = type
+        self.amount = amount
 
 
 class User(UserMixin, db.Model):
@@ -14,8 +29,10 @@ class User(UserMixin, db.Model):
     about = db.Column(db.String(300), nullable=True, unique=False)
     authenticated = db.Column(db.Boolean, default=False)
     registered_on = db.Column('registered_on', db.DateTime)
-    active = db.Column('is_active', db.Boolean(), nullable=False, server_default='1')
-    is_admin = db.Column('is_admin', db.Boolean(), nullable=False, server_default='0')
+    active = db.Column('is_active', db.Boolean(),
+                       nullable=False, server_default='1')
+    is_admin = db.Column('is_admin', db.Boolean(),
+                         nullable=False, server_default='0')
 
     # `roles` and `groups` are reserved words that *must* be defined
     # on the `User` model to use group- or role-based authorization.
