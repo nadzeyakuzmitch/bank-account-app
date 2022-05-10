@@ -8,21 +8,20 @@ from werkzeug.security import check_password_hash, generate_password_hash
 
 
 class Transaction(db.Model):
-    __tablename__ = 'transaction'
+    __tablename__ = 'transactions'
     id = db.Column(db.Integer, primary_key=True)
-    type = db.Column(db.String(300), nullable=True, unique=False)
-    amount = db.Column(db.Integer, nullable=True, unique=False)
+    transactionType = db.Column(db.String(300), nullable=True, unique=False)
+    transactionAmount = db.Column(db.Integer, nullable=True, unique=False)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
-    user = relationship("User", back_populates="transaction", uselist=False)
+    user = relationship("User", back_populates="transactions", uselist=False)
 
-    def __init__(self, type, amount):
-        self.type = type
-        self.amount = amount
+    def __init__(self, transactionType, transactionAmount):
+        self.transactionType = transactionType
+        self.transactionAmount = transactionAmount
 
 
 class User(UserMixin, db.Model):
     __tablename__ = 'users'
-
     id = db.Column(db.Integer, primary_key=True)
     email = db.Column(db.String(120), unique=True, nullable=False)
     password = db.Column(db.String(300), nullable=False, unique=True)
@@ -33,6 +32,8 @@ class User(UserMixin, db.Model):
                        nullable=False, server_default='1')
     is_admin = db.Column('is_admin', db.Boolean(),
                          nullable=False, server_default='0')
+    transactions = db.relationship(
+        "Transaction", back_populates="user", cascade="all, delete")
 
     # `roles` and `groups` are reserved words that *must* be defined
     # on the `User` model to use group- or role-based authorization.
