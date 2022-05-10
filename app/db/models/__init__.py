@@ -10,14 +10,14 @@ from werkzeug.security import check_password_hash, generate_password_hash
 class Transaction(db.Model):
     __tablename__ = 'transactions'
     id = db.Column(db.Integer, primary_key=True)
-    transactionType = db.Column(db.String(300), nullable=True, unique=False)
-    transactionAmount = db.Column(db.Integer, nullable=True, unique=False)
+    type = db.Column(db.String(300), nullable=True, unique=False)
+    amount = db.Column(db.Integer, nullable=True, unique=False)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     user = relationship("User", back_populates="transactions", uselist=False)
 
-    def __init__(self, transactionType, transactionAmount):
-        self.transactionType = transactionType
-        self.transactionAmount = transactionAmount
+    def __init__(self, amount, type):
+        self.type = type
+        self.amount = amount
 
 
 class User(UserMixin, db.Model):

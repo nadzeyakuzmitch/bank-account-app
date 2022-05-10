@@ -5,12 +5,14 @@
     {% block head %}
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="shortcut icon" href="{{ url_for('static', filename='images/favicon.ico') }}">
 
     {% block styles %}
     {{ bootstrap.load_css() }}
     {% endblock %}
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
     <title>Bank App | {% block title %}{% endblock %}</title>
     {% endblock %}
 </head>
@@ -33,10 +35,12 @@
                         <div class="navbar-nav mr-auto">
                             {% if current_user.is_authenticated %}
                             {{ render_nav_item('auth.dashboard','Dashboard' ) }}
+                            {{ render_nav_item('transactions_pages.transactions_browse','View Bank Statement' ) }}
+                            {{ render_nav_item('transactions_pages.transactions_upload','Upload Transactions History' ) }}
 
 
                             {% else %}
-                            {{ render_nav_item('bank_account_app_pages.index', 'Home') }}
+                            {{ render_nav_item('bank_app_pages.index', 'Home') }}
                             {% endif %}
                         </div>
                     </div>
@@ -71,7 +75,7 @@
         <div class="row">
             {{ render_messages() }}
         </div>
-        <div class="row mt-5">
+        <div class="row mt-3">
             {% block content %}
             {% endblock %}
         </div>
@@ -85,6 +89,7 @@
     <footer class="container-fluid text-center bg-secondary py-2">
         Environment: {{ deployment_environment }} - Copyright: Nadzeya Kuzmitch {{ year }}
     </footer>
+    <script src="{{ url_for('static', filename='js/scripts.js') }}"></script>
 </body>
 
 </html>

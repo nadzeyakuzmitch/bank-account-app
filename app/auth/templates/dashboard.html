@@ -1,6 +1,4 @@
 {% extends "base.html" %}
-{% set active_page = "songsDashboard" %}
-{% set active_menu = "project_3_songs" %}
 {% block title %}Dashboard{% endblock %}
 {% block content %}
 {% from 'bootstrap5/form.html' import render_form, render_field, render_form_row %}
@@ -8,7 +6,9 @@
 <div class="container py-4">
     <div class="card p-4 mx-auto">
         <h2>Dashboard</h2>
-        <span>Welcome: {{ current_user.email }}</span>
+        <h4>Welcome to Your Account Dashboard, <strong>{{ current_user.email }}</strong>!</h4>
+        <p class="mt-4">Your <string>Debit Account</string> balance is <strong>{{debit_result}}</strong></p>
+        <p>Your <string>Credit Account</string> balance is <strong>{{credit_result}}</strong></p>
     </div>
 </div>
 {% endblock %}

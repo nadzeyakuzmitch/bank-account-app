@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% set active_page = "uploadTransactions" %}
+{% set active_menu = "bank_transactions" %}
+{% block content %}
+{% from 'bootstrap5/form.html' import render_form, render_field, render_form_row %}
+
+<div class="container py-4">
+    <div class="card p-4 mx-auto">
+        <h2 >Upload Transactions</h2>
+        {{ render_form(form) }}
+    </div>
+</div>
+
+{% endblock %}

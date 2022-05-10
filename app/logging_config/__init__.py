@@ -38,9 +38,9 @@ def after_request_logging(response):
     elif request.path.startswith('/bootstrap'):
         return response
 
-    if request.method == 'POST' and request.path.__contains__('/songs/upload'):
-        songUploadsLogger = logging.getLogger("songUploads")
-        songUploadsLogger.info("After song upload request handler executed")
+    if request.method == 'POST' and request.path.__contains__('/transactions/upload'):
+        transactionUploadsLogger = logging.getLogger("transactionUploads")
+        transactionUploadsLogger.info("After transaction upload request handler executed")
         
     current_app.logger.info("After request handler executed")
 
@@ -91,10 +91,10 @@ LOGGING_CONFIG = {
             'maxBytes': 10000000,
             'backupCount': 5,
         },
-        'file.handler.songUploads': {
+        'file.handler.transactionUploads': {
             'class': 'logging.handlers.RotatingFileHandler',
             'formatter': 'RequestFormatter',
-            'filename': 'app/logs/songUploads.log',
+            'filename': 'app/logs/transactionUploads.log',
             'maxBytes': 10000000,
             'backupCount': 5,
         },
@@ -127,8 +127,8 @@ LOGGING_CONFIG = {
             'level': 'INFO',
             'propagate': False
         },
-        'songUploads': {
-            'handlers': ['file.handler.songUploads'],
+        'transactionUploads': {
+            'handlers': ['file.handler.transactionUploads'],
             'level': 'INFO',
             'propagate': False
         }

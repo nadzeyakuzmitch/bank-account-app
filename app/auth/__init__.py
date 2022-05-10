@@ -1,8 +1,9 @@
+from sqlalchemy import func
 from app.auth.decorators import admin_required
 from app.auth.forms import (login_form, profile_form, register_form,
                             security_form, user_edit_form)
 from app.db import db
-from app.db.models import User
+from app.db.models import Transaction, User
 from flask import (Blueprint, current_app, flash, redirect, render_template,
                    url_for)
 from flask_login import current_user, login_required, login_user, logout_user
@@ -70,7 +71,18 @@ def logout():
 @auth.route('/dashboard')
 @login_required
 def dashboard():
-    return render_template('dashboard.html')
+    debit_result = db.session.query(func.sum(Transaction.amount)).filter_by(user_id = current_user.get_id()).filter_by(type = 'DEBIT').one()[0]
+    credit_result = db.session.query(func.sum(Transaction.amount)).filter_by(user_id = current_user.get_id()).filter_by(type = 'CREDIT').one()[0]
+    if str(debit_result).isnumeric():
+        debit_result = '$' + str(debit_result)
+    else:
+        debit_result = '$0'
+
+    if str(credit_result).isnumeric():
+        credit_result = '$' + str(credit_result)
+    else:
+        credit_result = '$0'
+    return render_template('dashboard.html', credit_result=credit_result, debit_result=debit_result)
 
 
 @auth.route('/profile', methods=['POST', 'GET'])
