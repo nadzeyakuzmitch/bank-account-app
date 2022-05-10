@@ -1,13 +1,13 @@
 # Project Setup
 
-[![Production Workflow](https://github.com/nadzeyakuzmitch/tech-stack-portal/actions/workflows/prod.yml/badge.svg)](https://github.com/nadzeyakuzmitch/tech-stack-portal/actions/workflows/prod.yml)
+[![Production Workflow](https://github.com/nadzeyakuzmitch/bank-account-app/actions/workflows/prod.yml/badge.svg)](https://github.com/nadzeyakuzmitch/bank-account-app/actions/workflows/prod.yml)
 
-* [Production Deployment](https://tech-stack-portal-prod.herokuapp.com/)
+* [Production Deployment](https://bank-account-app-prod.herokuapp.com/)
 
 
-[![Development Workflow](https://github.com/nadzeyakuzmitch/tech-stack-portal/actions/workflows/dev.yml/badge.svg)](https://github.com/nadzeyakuzmitch/tech-stack-portal/actions/workflows/dev.yml)
+[![Development Workflow](https://github.com/nadzeyakuzmitch/bank-account-app/actions/workflows/dev.yml/badge.svg)](https://github.com/nadzeyakuzmitch/bank-account-app/actions/workflows/dev.yml)
 
-* [Developmental Deployment](https://tech-stack-portal-dev.herokuapp.com/)
+* [Developmental Deployment](https://bank-account-app-dev.herokuapp.com/)
 
 ## Setting up CI/CD
 
