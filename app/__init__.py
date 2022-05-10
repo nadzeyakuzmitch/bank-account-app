@@ -30,18 +30,13 @@ def create_app():
     elif app.config["ENV"] == "testing":
         app.config.from_object("app.config.TestingConfig")
 
-    # https://flask-login.readthedocs.io/en/latest/  <-login manager
     login_manager.init_app(app)
     login_manager.login_view = "auth.login"
-    # Needed for CSRF protection of form submissions and WTF Forms
-    # https://wtforms.readthedocs.io/en/3.0.x/
     csrf = CSRFProtect(app)
-    # https://bootstrap-flask.readthedocs.io/en/stable/
     bootstrap = Bootstrap5(app)
 
     app.register_blueprint(auth_pages)
     app.register_blueprint(bank_app_pages)
-    # these load functions with web interface
     app.register_blueprint(auth)
     app.context_processor(utility_text_processors)
 
