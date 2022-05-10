@@ -6,6 +6,7 @@ from flask_wtf.csrf import CSRFProtect
 
 from app.auth import auth
 from app.auth_pages import auth_pages
+from app.bank_account_app_pages import bank_account_app_pages
 from app.cli import (create_database, create_log_folder, create_uploads_folder,
                      db_folder_create, uploads_folder_create)
 from app.context_processors import utility_text_processors
@@ -13,8 +14,8 @@ from app.db import db
 from app.db.models import User
 from app.error_handlers import error_handlers
 from app.logging_config import log_con
+
 # from app.songs import songs
-# from app.tech_stack_pages import tech_stack_pages
 
 login_manager = flask_login.LoginManager()
 
@@ -38,10 +39,8 @@ def create_app():
     # https://bootstrap-flask.readthedocs.io/en/stable/
     bootstrap = Bootstrap5(app)
 
-    # app.register_blueprint(tech_stack_pages)
     app.register_blueprint(auth_pages)
-    # app.register_blueprint(tech_stack_pages)
-    # app.register_blueprint(tech_stack_pages)
+    app.register_blueprint(bank_account_app_pages)
     # these load functions with web interface
     app.register_blueprint(auth)
     app.context_processor(utility_text_processors)

@@ -39,11 +39,11 @@
                             {% endif %}
 
                         {% else %}
-                            {{ render_nav_item('simple_pages.index', 'Home') }}
+                            {{ render_nav_item('bank_account_app_pages.index', 'Home') }}
                         {% endif %}
 
-                        {{ render_nav_item('simple_pages.about','About') }}
-                        {{ render_nav_item('simple_pages.welcome','Welcome') }}
+                        {{ render_nav_item('bank_account_app_pages.index','About') }}
+                        {{ render_nav_item('bank_account_app_pages.index','Welcome') }}
                     </div>
                 </div>
                 <div class="navbar-nav d-flex">
@@ -83,7 +83,7 @@
     {{ bootstrap.load_js() }}
 {% endblock %}
 <footer class="text-center mt-5">
-    Environment: {{ deployment_environment }} - Copyright: {{ year }} {{ format_price(100) }}
+    Environment: {{ deployment_environment }} - Copyright: Nadzeya Kuzmitch {{ year }}
 </footer>
 </body>
 </html>
