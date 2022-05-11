@@ -24,6 +24,7 @@ class DevelopmentConfig(Config):
 
 class TestingConfig(Config):
     TESTING = True
-    SQLALCHEMY_DATABASE_URI = "sqlite:///:memory:"
+    db_dir = "database/dbtest.sqlite"
+    SQLALCHEMY_DATABASE_URI = "sqlite:///" + os.path.abspath(db_dir)
     SESSION_COOKIE_SECURE = False
     DEBUG = True
