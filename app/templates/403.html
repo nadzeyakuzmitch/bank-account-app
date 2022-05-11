@@ -1,11 +1,19 @@
 {% extends "base.html" %}
 {% block title %}Access Denied 403{% endblock %}
 {% block content %}
-<h2>Access Denied - 403</h2>
-<p>
-  <a href="{{ url_for('auth.dashboard') }}">
-    Click Here
-  </a>
-  to go to the Dashboard
-</p>
+<div class="container">
+  <div class="row mt-3">
+    <div class="container py-4">
+      <div class="card p-4 mx-auto">
+        <h2>Access Denied - 403</h2>
+        <p class="mb-0">
+          <a href="{{ url_for('auth.dashboard') }}">
+            Click Here
+          </a>
+          to go to the Dashboard
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
 {% endblock %}
