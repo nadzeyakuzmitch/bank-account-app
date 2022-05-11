@@ -8,13 +8,6 @@ from click.testing import CliRunner
 runner = CliRunner()
 
 
-def test_create_log_folder():
-    """Testing if folder was created."""
-    root = os.path.dirname(os.path.abspath(__file__))
-    logdir = os.path.join(root, '../app/logs')
-    assert os.path.exists(logdir) is True
-
-
 def test_create_errors_log_file(client):
     """Testing if errors log was created."""
     response = client.get("/")
