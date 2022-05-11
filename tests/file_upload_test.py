@@ -2,7 +2,24 @@
 from flask_login import FlaskLoginClient
 
 from app import db
+from app.auth.forms import csv_upload
 from app.db.models import Transaction, User
+
+
+def test_upload_csv(application):
+    """ Creating an admin user and uploading a csv file as them """
+    application.test_client_class = FlaskLoginClient
+    user = User('user@user.user', 'user')
+    db.session.add(user)
+    db.session.commit()
+
+    transactions_csv = '../uploads/single.csv'
+    with application.test_client(user=user) as client:
+        response = client.get('/transactions/upload')
+        assert response.status_code == 200
+        form = csv_upload()
+        form.file = transactions_csv
+        assert form.validate
 
 
 def test_credit_balance_correct(application):
