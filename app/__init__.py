@@ -58,6 +58,32 @@ def create_app():
     return app
 
 
+def create_test_app():
+    """Create fake app for testing with test database"""
+    app = Flask(__name__)
+    app.config.from_object("app.config.TestingConfig")
+
+    login_manager.init_app(app)
+    login_manager.login_view = "auth.login"
+    csrf = CSRFProtect(app)
+    bootstrap = Bootstrap5(app)
+
+    app.register_blueprint(auth_pages)
+    app.register_blueprint(bank_app_pages)
+    app.register_blueprint(auth)
+    app.context_processor(utility_text_processors)
+
+    app.register_blueprint(log_con)
+    app.register_blueprint(error_handlers)
+    app.register_blueprint(transactions_pages)
+    app.cli.add_command(create_database)
+    app.cli.add_command(create_uploads_folder)
+    app.cli.add_command(create_log_folder)
+    db.init_app(app)
+
+    return app
+
+
 @login_manager.user_loader
 def user_loader(user_id):
     try:
