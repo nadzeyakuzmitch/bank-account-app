@@ -2,14 +2,14 @@
 # pylint: disable=redefined-outer-name
 import pytest
 
-from app import create_app, User
+from app import create_test_app, User
 from app.db import db
 
 
 @pytest.fixture()
 def application():
     """This makes the appplication itself"""
-    application = create_app()
+    application = create_test_app()
     with application.app_context():
         db.create_all()
         yield application
