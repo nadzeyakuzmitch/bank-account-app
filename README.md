@@ -14,3 +14,7 @@
 1. To Build with docker compose:
    docker compose up --build
 2. To run tests, Lint, and Coverage report use this command: pytest --pylint --cov
+
+## Finalization
+
+This project is finished. PR was created solely to activate development badge.
