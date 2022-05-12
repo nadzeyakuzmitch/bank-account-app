@@ -8,8 +8,13 @@ from flask.cli import with_appcontext
 def db_folder_create():
     root = os.path.dirname(os.path.abspath(__file__))
     dbdir = os.path.join(root, '../../database')
+    dbname = os.path.join(root, '../../database/db2.sqlite')
+
     if not os.path.exists(dbdir):
         os.mkdir(dbdir)
+        db.create_all()
+
+    if not os.path.exists(dbname):
         db.create_all()
 
 

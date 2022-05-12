@@ -81,11 +81,6 @@ def create_test_app():
     app.cli.add_command(create_log_folder)
     db.init_app(app)
 
-    @app.before_request
-    def create_necessary_folders():
-        db_folder_create()
-        uploads_folder_create()
-
     return app
 
 
